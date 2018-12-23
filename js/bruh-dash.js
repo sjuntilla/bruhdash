@@ -167,16 +167,22 @@ global.bruhdash = {
 
   // creates an array of elements into groups of length of specified size
   chunk: function (arr, x) {
-    const chunk = [];
-
+    if (x === 0) {
+      return [];
+    }
+    if (x < 1 || x === null || isNaN(x)) {
+      x = 1;
+    }
+    var chunkArr = [];
+    for (var i = 0; i < arr.length; i += x) {
+      chunkArr.push(arr.slice(i, i + x));
+    }
+    return chunkArr;
   },
 
   // iterates over elements of a collection and invokes iteratee for each element
   // Note: this should work for arrays and objects
-  forEach: function (x, y) {
-
-
-  },
+  forEach: function () {},
 
   // creates an array of values by running each element in collection thru the iteratee
   // Note: this should work for arrays and objects
