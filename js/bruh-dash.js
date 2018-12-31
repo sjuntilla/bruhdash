@@ -182,12 +182,34 @@ global.bruhdash = {
 
   // iterates over elements of a collection and invokes iteratee for each element
   // Note: this should work for arrays and objects
-  forEach: function () {},
+  forEach: function (x, funct) {
+    if (Array.isArray(x) === true) {
+      for (let i = 0; i < x.length; i++) {
+        funct(x[i]);
+      }
+    } else {
+      for (var key in x) {
+        funct(x[key]);
+      }
+    }
+  },
 
   // creates an array of values by running each element in collection thru the iteratee
   // Note: this should work for arrays and objects
-  map: function () {
+  map: function (x, funct) {
+    let arr = [];
+    if (Array.isArray(x) === true) {
+      for (let i = 0; i < x.length; i++) {
+        arr.push(funct(x[i]));
 
+      }
+    } else {
+      for (var key in x) {
+        arr.push(funct(x[key]));
+
+      }
+    }
+    return arr;
   },
 
   /*************************
@@ -196,14 +218,40 @@ global.bruhdash = {
 
   // iterates over elements of a collection and returns all elements that the predicate returns truthy for
   // Note: this should work for arrays and objects
-  filter: function () {
-
+  filter: function (x, funct) {
+    let arr = [];
+    if (Array.isArray(x) === true) {
+      for (let i = 0; i < x.length; i++) {
+        if (funct(x[i]) === true) {
+          arr.push(x[i]);
+        }
+      }
+    } else {
+      for (var key in x) {
+        if (funct(x[key]) === true) {
+          arr.push(x[key]);
+        }
+      }
+    }
+    return arr;
   },
 
   // Reduces the collection to a value which is the accumulated result of running each element
   // in the collection through an iteratee
   // Note: this should work for arrays and objects
-  reduce: function () {
+  reduce: function (x) {
+    let val = 0;
+    if (Array.isArray(x) === true) {
+      for (let i = 0; i < x.length; i++) {
+        val += x[i];
+      }
+      return val;
+    } else {
+      for (var key in x) {
+        val += x[key];
+      }
+      return val;
+    }
 
   }
 };
